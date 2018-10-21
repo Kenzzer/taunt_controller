@@ -1,0 +1,15 @@
+"Games"
+{
+	"tf"
+	{
+		"Signatures"
+		{
+			"CTFPlayer::PlayTauntSceneFromItem"
+			{
+				"library" 	"server"
+				"linux"		"@_ZN9CTFPlayer22PlayTauntSceneFromItemEPK13CEconItemView"
+				"windows" 	"\x55\x8B\xEC\x81\xEC\x2A\x2A\x2A\x2A\x53\x8B\x5D\x08\x57\x8B\xF9\x85\xDB\x75\x2A\x5F\x32\xC0\x5B"
+			}
+		}
+	}
+}
