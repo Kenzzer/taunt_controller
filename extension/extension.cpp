@@ -10,15 +10,24 @@ IForward *g_pForwardPlayTauntSceneFromItem = NULL;
 
 class CEconItemView;
 
+class CEconItemView
+{
+public:
+	void *m_pVTable;
+	uint16_t m_iItemDefinitionIndex;
+	int32_t m_iEntityQuality;
+	uint32_t m_iEntityLevel;
+};
+	
 DETOUR_DECL_MEMBER1(CTFPlayer_PlayTauntSceneFromItem, bool, const CEconItemView *, pTauntItem)
 {
-	cell_t iPlayer = gamehelpers->EntityToBCompatRef((CBaseEntity *)this);
-	cell_t iTauntIndex = *(unsigned short *)((uint8_t *)pTauntItem + 4);
+	if (!pTauntItem) return DETOUR_MEMBER_CALL(CTFPlayer_PlayTauntSceneFromItem)(pTauntItem);
 	
+	cell_t iPlayer = gamehelpers->EntityToBCompatRef((CBaseEntity *)this);
 	cell_t result = 0;
 	
 	g_pForwardPlayTauntSceneFromItem->PushCell(iPlayer);
-	g_pForwardPlayTauntSceneFromItem->PushCell(iTauntIndex);
+	g_pForwardPlayTauntSceneFromItem->PushCell(pTauntItem->m_iItemDefinitionIndex);
 	g_pForwardPlayTauntSceneFromItem->PushCellByRef(&result);
 
 	cell_t retValue = Pl_Continue;
